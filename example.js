@@ -1,10 +1,11 @@
 const puppeteer = require('puppeteer');
+const iPhone = puppeteer.devices['iPhone 6'];
 
-(async () => {
-    const browser = await puppeteer.launch();
+puppeteer.launch().then(async browser => {
     const page = await browser.newPage();
-    await page.goto('https://google.com');
-    await page.screenshot({ path: 'google.png' });
+    await page.emulate(iPhone);
+    await page.goto('https://www.google.com');
+    await page.screenshot({ path: 'googleByIphone.png' });
 
     await browser.close();
-})();
+});
